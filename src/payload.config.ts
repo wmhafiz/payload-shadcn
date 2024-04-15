@@ -1,4 +1,4 @@
-import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 // import { payloadCloud } from '@payloadcms/plugin-cloud'
 import { lexicalEditor } from '@payloadcms/richtext-lexical' // editor-import
 import path from 'path'
@@ -22,8 +22,10 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: mongooseAdapter({
-    url: process.env.DATABASE_URI || '',
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.POSTGRES_URI || '',
+    },
   }),
   // Sharp is now an optional dependency -
   // if you want to resize images, crop, set focal point, etc.
