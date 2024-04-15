@@ -1,12 +1,11 @@
-import { postgresAdapter } from '@payloadcms/db-postgres'
-// import { payloadCloud } from '@payloadcms/plugin-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical' // editor-import
 import path from 'path'
-import { buildConfig } from 'payload/config'
-// import sharp from 'sharp'
+import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
-import { Users } from './collections/Users'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { buildConfig } from 'payload/config'
+import { Users, Challenges, Diary, Exercises, Meals, Media, Weights, Workouts } from './collections'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -14,10 +13,14 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    autoLogin: {
+      email: 'fizyboy@gmail.com',
+      password: 'fawwaz',
+      prefillOnly: true,
+    },
   },
-  collections: [Users],
+  collections: [Users, Media, Challenges, Diary, Meals, Exercises, Workouts, Weights],
   editor: lexicalEditor({}),
-  // plugins: [payloadCloud()], // TODO: Re-enable when cloud supports 3.0
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
@@ -33,6 +36,5 @@ export default buildConfig({
 
   // This is temporary - we may make an adapter pattern
   // for this before reaching 3.0 stable
-
-  // sharp,
+  sharp,
 })
