@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=--no-deprecation next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
+    "generate": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -14,6 +16,7 @@
     "@payloadcms/db-postgres": "3.0.0-beta.10",
     "@payloadcms/next": "3.0.0-beta.10",
     "@payloadcms/richtext-lexical": "3.0.0-beta.10",
+    "@payloadcms/ui": "3.0.0-beta.10",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-aspect-ratio": "^1.0.3",
@@ -42,6 +45,7 @@
     "@radix-ui/react-toggle-group": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.7",
     "class-variance-authority": "^0.7.0",
+    "cross-env": "^7.0.3",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
     "date-fns": "^3.6.0",
